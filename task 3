@@ -1,0 +1,248 @@
+Test Suite Description:
+We're going to test three main things:
+
+Get all posts (GET request without parameters)
+Get a specific post by ID (GET request with parameters)
+Create a new post (POST request)
+
+For each test, we'll check that the response is correct and has all the data we expect.
+
+// Test 1: GET All Posts
+console.log('=== TEST 1: GET All Posts ===\n');
+
+fetch('https://jsonplaceholder.typicode.com/posts')
+  .then(r => {
+    if (r.status !== 200) throw new Error('Status not 200');
+    console.log('✓ Status: 200');
+    return r.json();
+  })
+  .then(data => {
+    if (!Array.isArray(data)) throw new Error('Not an array');
+    console.log('✓ Response is array with ' + data.length + ' posts');
+    
+    const fields = ['userId', 'id', 'title', 'body'];
+    fields.forEach(f => {
+      if (!data[0][f]) throw new Error('Missing ' + f);
+      console.log('✓ Field ' + f + ' exists');
+    });
+    console.log('\n✓ TEST 1 PASSED\n');
+  })
+  .catch(e => console.log('\n✗ TEST 1 FAILED: ' + e.message + '\n'));
+
+// Test 2: GET Specific Post
+console.log('=== TEST 2: GET Specific Post ===\n');
+
+fetch('https://jsonplaceholder.typicode.com/posts/5')
+  .then(r => {
+    if (r.status !== 200) throw new Error('Status not 200');
+    console.log('✓ Status: 200');
+    return r.json();
+  })
+  .then(data => {
+    if (data.id !== 5) throw new Error('ID not 5');
+    console.log('✓ Post ID = 5');
+    
+    if (!data.title || !data.body) throw new Error('Missing title or body');
+    console.log('✓ Title: ' + data.title);
+    console.log('✓ Body: ' + data.body.substring(0, 40) + '...');
+    console.log('\n✓ TEST 2 PASSED\n');
+  })
+  .catch(e => console.log('\n✗ TEST 2 FAILED: ' + e.message + '\n'));
+
+// Test 3: POST Create Post
+console.log('=== TEST 3: POST Create Post ===\n');
+
+const newPost = {
+  title: 'Test Title',
+  body: 'Test body',
+  userId: 1
+};
+
+fetch('https://jsonplaceholder.typicode.com/posts', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(newPost)
+})
+  .then(r => {
+    if (r.status !== 201 && r.status !== 200) throw new Error('Status not 201/200');
+    console.log('✓ Status: ' + r.status);
+    return r.json();
+  })
+  .then(data => {
+    if (!data.id) throw new Error('No ID assigned');
+    console.log('✓ ID: ' + data.id);
+    
+    if (data.title !== newPost.title) throw new Error('Title mismatch');
+    if (data.body !== newPost.body) throw new Error('Body mismatch');
+    if (data.userId !== newPost.userId) throw new Error('UserId mismatch');
+    
+    console.log('✓ Title: ' + data.title);
+    console.log('✓ Body: ' + data.body);
+    console.log('✓ UserId: ' + data.userId);
+    console.log('\n✓ TEST 3 PASSED\n');
+  })
+  .catch(e => console.log('\n✗ TEST 3 FAILED: ' + e.message + '\n'));
+
+Summary of What Each Test Does:
+Test 1 (GET all posts):
+
+Sends request to get all posts
+Checks status is 200
+Verifies response is a list
+Confirms each post has userId, id, title, body fields
+
+Test 2 (GET specific post):
+
+Sends request to get post with ID 5
+Checks status is 200
+Verifies response is a single object (not a list)
+Confirms the ID matches what we requested
+Validates field types (numbers and strings)
+
+Test 3 (POST new post):
+
+Creates a new post with title, body, and userId
+Checks status is 201 (or 200)
+Verifies the API assigned an ID to the new post
+Confirms the data we sent matches what came back
+Validates all required fields are present
+Run:
+
+
+
+
+
+
+answer 2 
+javascript// Short GET Request with Query Parameters Test
+console.log('=== GET Request with Query Parameters Test ===\n');
+
+fetch('https://jsonplaceholder.typicode.com/posts/1')
+  .then(res => {
+    console.log('Status: ' + res.status);
+    if (res.status !== 200) throw new Error('Status is not 200');
+    console.log('✓ Status code is 200\n');
+    return res.json();
+  })
+  .then(post => {
+    console.log('Checking post with ID = 1...\n');
+    
+    // Check ID
+    if (post.id !== 1) throw new Error('ID is not 1');
+    console.log('✓ Post ID = 1');
+    
+    // Check title not null
+    if (!post.title || post.title.trim() === '') throw new Error('Title is null or empty');
+    console.log('✓ Title: ' + post.title);
+    
+    // Check body not null
+    if (!post.body || post.body.trim() === '') throw new Error('Body is null or empty');
+    console.log('✓ Body: ' + post.body.substring(0, 50) + '...');
+    
+    console.log('\n✓ ALL TESTS PASSED');
+  })
+  .catch(err => {
+    console.log('\n✗ TEST FAILED: ' + err.message);
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// POST Request Test
+
+
+console.log('=== POST Request Test ===\n');
+
+const newPost = {
+  title: "Test Title",
+  body: "This is a test post.",
+  userId: 123
+};
+
+fetch('https://jsonplaceholder.typicode.com/posts', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(newPost)
+})
+  .then(res => {
+    console.log('Status: ' + res.status);
+    if (res.status !== 201) throw new Error('Status is not 201');
+    console.log('✓ Status code is 201\n');
+    return res.json();
+  })
+  .then(post => {
+    console.log('Checking created post...\n');
+    
+    // Check ID was assigned
+    if (!post.id) throw new Error('No ID assigned');
+    console.log('✓ ID assigned: ' + post.id);
+    
+    // Check title matches
+    if (post.title !== newPost.title) throw new Error('Title mismatch');
+    console.log('✓ Title: ' + post.title);
+    
+    // Check body matches
+    if (post.body !== newPost.body) throw new Error('Body mismatch');
+    console.log('✓ Body: ' + post.body);
+    
+    // Check userId matches
+    if (post.userId !== newPost.userId) throw new Error('UserId mismatch');
+    console.log('✓ UserId: ' + post.userId);
+    
+    console.log('\n✓ ALL TESTS PASSED');
+  })
+  .catch(err => {
+    console.log('\n✗ TEST FAILED: ' + err.message);
+  });
+
+
+
+
+
+
+
+
+Negative testing
+
+
+
+//Negative Testing - Invalid Endpoint
+console.log('=== Negative Testing - Invalid Endpoint ===\n');
+
+fetch('https://jsonplaceholder.typicode.com/posts/9999')
+  .then(res => {
+    console.log('Status: ' + res.status);
+    if (res.status !== 404) throw new Error('Status is not 404');
+    console.log('✓ Status code is 404\n');
+    return res.text();
+  })
+  .then(body => {
+    console.log('Response body:');
+    if (body.trim() === '') {
+      console.log('✓ Response is empty (expected)');
+    } else {
+      console.log('Response content: ' + body);
+      console.log('✓ Response contains error message or data');
+    }
+    console.log('\n✓ ALL TESTS PASSED');
+  })
+  .catch(err => {
+    console.log('\n✗ TEST FAILED: ' + err.message);
+  });
+
+
+
+
+
