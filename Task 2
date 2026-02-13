@@ -1,0 +1,197 @@
+Test Case 1
+Test Case ID: TC_LOGIN_007
+Title: User can log in successfully with correct username and password
+Pre-conditions: The user has an active account with username "Maxwell" and password "Password321"
+Test Steps:
+
+Go to the login page
+Type "Maxwell" in the username box
+Type "Password321" in the password box
+Click the Login button
+Wait for the page to load
+
+Expected Result: You get logged in and see the home page or dashboard
+Actual Result: (To be filled in when you actually test)
+Priority: High
+Remarks: This is the main thing we need to work—if this doesn't work, nothing else matters
+
+Test Case 2
+Test Case ID: TC_LOGIN_008
+Title: System shows error when password is wrong
+Pre-conditions: Username "john_doe" exists with correct password "Password123"
+Test Steps:
+
+Go to the login page
+Type "Maxwell" in the username box
+Type "WrongPassword" in the password box
+Click Login
+Look at what happens
+
+Expected Result: You see an error message saying something like "Invalid username or password" and you stay on the login page
+Actual Result: (To be filled in when you actually test)
+Priority: High
+Remarks: Makes sure the system doesn't let people in with bad passwords
+
+Test Case 3
+Test Case ID: TC_LOGIN_005
+Title: Can't log in if username doesn't exist
+Pre-conditions: The username "fake_user_xrz" is not in the system
+Test Steps:
+
+Go to the login page
+Type "fake_user_xrz" in the username box
+Type any password you want
+Click Login
+
+Expected Result: You see an error and stay on the login page. The error should say something about invalid credentials
+Actual Result: (To be filled in when you actually test)
+Priority: High
+Remarks: Good for security—we don't want to tell people if a username exists or not
+
+Test Case 4
+Test Case ID: TC_LOGIN_002
+Title: Error shows up if you don't fill in the username
+Pre-conditions: You're on the login page
+Test Steps:
+
+Go to the login page
+Leave the username box empty
+Type a password in the password box
+Click Login
+
+Expected Result: You see an error message like "Username is required" and nothing happens
+Actual Result: (To be filled in when you actually test)
+Priority: High
+Remarks: Makes sure the form checks that you actually entered something
+
+Test Case 5
+Test Case ID: TC_LOGIN_009
+Title: Error shows up if you don't fill in the password
+Pre-conditions: You're on the login page
+Test Steps:
+
+Go to the login page
+Type "john_doe" in the username box
+Leave the password box empty
+Click Login
+
+Expected Result: You see an error message like "Password is required" and you stay on the login page
+Actual Result: (To be filled in when you actually test)
+Priority: High
+Remarks: Another basic validation check
+
+Test Case 6
+Test Case ID: TC_LOGIN_003
+Title: Remember Me checkbox keeps you logged in
+Pre-conditions: You have a valid account "john_doe" with password "Password123". Your browser saves cookies.
+Test Steps:
+
+Go to the login page
+Type "Maxwell" in username
+Type "Password321" in password
+Check the "Remember Me" box
+Click Login
+You should be logged in now
+Close your browser completely
+Open the browser again and go back to the app
+
+Expected Result: You're already logged in without having to type your credentials again
+Actual Result: (To be filled in when you actually test)
+Priority: Medium
+Remarks: Tests whether the remember me thing actually works
+
+Test Case 7
+Test Case ID: TC_LOGIN_012
+Title: Clicking "Forgot Password" takes you to the right page
+Pre-conditions: You're on the login page
+Test Steps:
+
+Go to the login page
+Look for the "Forgot Password" link
+Click on it
+
+Expected Result: You get taken to a page where you can reset your password
+Actual Result: (To be filled in when you actually test)
+Priority: Medium
+Remarks: Just makes sure the link works and goes somewhere useful
+
+Test Case 8
+Test Case ID: TC_LOGIN_008
+Title: Log in works if username has special characters like a period or @
+Pre-conditions: There's a user account with username "Maxwell@example.com"
+Test Steps:
+
+Go to the login page
+Type "Maxwell@example.com" in the username field
+Type the correct password
+Click Login
+
+Expected Result: Login works fine and you get logged in
+Actual Result: (To be filled in when you actually test)
+Priority: Medium
+Remarks: Some people use email as username so we need to make sure that works
+
+Test Case 9
+Test Case ID: TC_LOGIN_006
+Title: What happens if there are extra spaces before or after your username
+Pre-conditions: Username "john_doe" exists in the system
+Test Steps:
+
+Go to the login page
+Type " john_doe " in the username (add spaces at the start and end)
+Type the correct password
+Click Login
+
+Expected Result: Either it logs you in (if the system removes spaces) OR it shows an error
+Actual Result: (To be filled in when you actually test)
+Priority: Low
+Remarks: Edge case thing—most people won't do this but good to check
+
+Test Case 10
+Test Case ID: TC_LOGIN_001
+Title: Password doesn't show as plain text when you type it
+Pre-conditions: You're on the login page
+Test Steps:
+
+Go to the login page
+Click in the password field
+Type "Password321"
+Watch what you see on the screen
+
+Expected Result: You should see dots or asterisks (***) instead of the actual letters you're typing
+Actual Result: (To be filled in when you actually test)
+Priority: High
+Remarks: Super important for security—if someone looks over your shoulder they shouldn't see your password
+
+Test Case 11
+Test Case ID: TC_LOGIN_010
+Title: System locks you out after too many wrong login attempts
+Pre-conditions: You're on the login page. Username "john_doe" exists.
+Test Steps:
+
+Go to the login page
+Try logging in with "john_doe" and a wrong password
+Click Login and see the error
+Do this 5 more times (total 6 failed attempts)
+Try one more time with the correct password
+
+Expected Result: After multiple failed attempts, the system should lock the account or show a message saying "Too many failed attempts, try again later" or similar
+Actual Result: (To be filled in when you actually test)
+Priority: High
+Remarks: Protects accounts from people trying to guess passwords
+
+Test Case 12
+Test Case ID: TC_LOGIN_004
+Title: Can still log in if you use different capital letters in your username
+Pre-conditions: Username "Maxwell" exists in the system
+Test Steps:
+
+Go to the login page
+Type "MAXWELL" (all caps) in the username field
+Type the correct password
+Click Login
+
+Expected Result: Login works because usernames are usually case-insensitive
+Actual Result: (To be filled in when you actually test)
+Priority: Low
+Remarks: Just checking if the system is flexible with uppercase vs lowercase
